@@ -1,0 +1,98 @@
+{
+  "info": {
+    "name": "Spring Boot Exercise",
+    "description": "REST API collection for the Spring Boot exercise",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" }
+  ],
+  "item": [
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dave\",\n  \"email\": \"dave@example.com\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users"]
+        }
+      }
+    },
+    {
+      "name": "Search Users (paginated)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/users/search?name=a&page=0&size=5",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "search"],
+          "query": [
+            { "key": "name", "value": "a" },
+            { "key": "page", "value": "0" },
+            { "key": "size", "value": "5" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Users with Orders Above",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/users/with-orders-above?minAmount=100",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "with-orders-above"],
+          "query": [{ "key": "minAmount", "value": "100" }]
+        }
+      }
+    },
+    {
+      "name": "Place Order",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{baseUrl}}/api/orders?userId=1&amount=200",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "orders"],
+          "query": [
+            { "key": "userId", "value": "1" },
+            { "key": "amount", "value": "200" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Call External API (Google)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/external/google",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "external", "google"]
+        }
+      }
+    },
+    {
+      "name": "Create User (validation error)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"\",\n  \"email\": \"not-an-email\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users"]
+        }
+      }
+    }
+  ]
+}
